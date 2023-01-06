@@ -1,13 +1,9 @@
 FROM jpillora/cloud-torrent
 
-COPY . /app
+EXPOSE 8080
 
-EXPOSE 63000
+CMD ["--port", "8080"]
 
-CMD ["--port", "63000"]
+VOLUME /path/to/my/downloads:/downloads
 
-VOLUME /root/downloads:/downloads
-
-ENV NAME=ct
-
-CMD ["--name", "$NAME", "-d", "-p", "63000:63000", "--restart", "always", "-v", "/root/downloads:/downloads", "jpillora/cloud-torrent", "--port", "63000"]
+CMD ["-d", "-p", "8080:8080", "-v", "/path/to/my/downloads:/downloads", "jpillora/cloud-torrent"]
